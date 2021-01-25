@@ -1,0 +1,65 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+	<title>Register Page</title>
+</head>
+<body>
+	<!--<h1>User Registeration</h1>
+  <form method="POST" action="">
+  	{% csrf_token %}
+  	{{form.username.label}}:&nbsp&nbsp &nbsp   {{form.username}}<br><br>
+  	{{form.first_name.label}}:&nbsp &nbsp {{form.first_name}}<br><br>
+  	{{form.last_name.label}}: &nbsp &nbsp  {{form.last_name}}<br><br>
+  	{{form.password1.label}}: &nbsp &nbsp &nbsp  {{form.password1}}<br><br>
+  	{{form.password2.label}}: &nbsp {{form.password2}}<br><br>
+  	<input type="submit" name="Register">
+  </form>
+  {{form.errors}}
+</body>
+</html>-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'loginstyle.css' %}">
+</head>
+<body>
+  <!--<form method="POST">
+    {% csrf_token %}
+      <input type="text" name="username"><br><br>
+      <input type="password" name="password"><br><br>
+      <input type="submit" name="login">
+  </form>-->
+<div class="container" id="container" style="height: 600px;">
+  
+  <div class="form-container sign-in-container" >
+      <h1>Sign Up</h1>
+      <form method="POST" action="">
+    {% csrf_token %}
+    <span>Username</span>{{form.username}}<br>
+    <span>First Name</span>{{form.first_name}}<br>
+    <span>Last Name</span>{{form.last_name}}<br>
+    <span>Password</span>{{form.password1}}<br>
+    <span>Confirm Password</span>{{form.password2}}<br>
+    <input type="submit" name="Register">
+  </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello, Friend!</h1>
+        <p>Already Registered?</p>
+        <a href="../login"><button class="ghost" id="signUp">Sign In</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

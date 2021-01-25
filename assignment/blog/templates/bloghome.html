@@ -1,0 +1,194 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<!--<h3><a href="{% url 'logout' %}">Logout</a></h3>
+	<nav>
+		<ul>
+			<li><a href="{% url 'bloghome' %}">Home</a></li>
+			<li><a href="{% url 'myblog' %}">My Blogs</a></li>
+			<li><a href="{% url 'suggestions' %}">Suggestions</li>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+		</ul>
+	</nav>
+<main>
+
+ <aside>
+ 	<h4>Add New Blog</h2>
+ 		<form method="POST" method="multipart/form-data">
+ 			{% csrf_token %}
+ 			<input type="text" name="userid" value="{{user.id}}" ><br>
+ 			<input type="text" name="firstname" value="{{user.first_name}}" readonly><br>
+ 			<input type="text" name="lastname" value="{{user.last_name}}" readonly><br>
+ 			{{form.title.label}} {{form.title}}<br>
+ 			{{form.blog_detail.label}}{{form.blog_detail}}<br>
+ 			{{form.blog_Main_Img.label}}{{form.blog_Main_Img}}<br>
+      {{form.blog_pic.label}}{{form.blog_pic}}<br>
+ 			<button>Submit</button>
+ 		</form>
+ </aside>
+ {% for i in follow_blogs %}
+    <h1>{{i.title}}</h1>
+    <h2>{{i.blog_detail}}</h2>
+    <img src="{{i.blog_pic}}">
+ {% endfor %}
+ <section class="content">
+    <header id="header"><h2>Hello {{user.username}}</h2></header>
+    <article class="post" id="post1">
+      <h2 class="title">When People Show Their Real Selves</h2>
+      <h4 class="author">By Lance Wager &middot; September 15, 2016</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt ipsam quibusdam provident ducimus voluptates odit pariatur distinctio quam est fugiat debitis fuga, natus iste dicta. Saepe, eum necessitatibus porro ullam.</p>
+      <img src="//placehold.it/100x50" alt="" />
+    </article>
+    <article class="post">
+      <h2 class="title">When People Show Their Real Selves</h2>
+      <h4 class="author">By Lance Wager &middot; September 15, 2016</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt ipsam quibusdam provident ducimus voluptates odit pariatur distinctio quam est fugiat debitis fuga, natus iste dicta. Saepe, eum necessitatibus porro ullam.</p>
+      <img src="//placehold.it/100x50" alt="" />
+    </article>
+    <article class="post" id="post2">
+      <h2 class="title">When People Show Their Real Selves</h2>
+      <h4 class="author">By Lance Wager &middot; September 15, 2016</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt ipsam quibusdam provident ducimus voluptates odit pariatur distinctio quam est fugiat debitis fuga, natus iste dicta. Saepe, eum necessitatibus porro ullam.</p>
+      <img src="//placehold.it/100x50" alt="" />
+    </article>
+    <footer id="footer">
+      <a href="##" class="button">Next</a>
+    </footer>
+  </section>
+</main>
+</body>
+</html>-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Site Metas -->
+    <title>Blog Home</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Site Icons -->
+    
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet"> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap.css' %}" rel="stylesheet">
+
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="{% static 'font-awesome.min.css' %}"  rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'style.css' %}"  rel="stylesheet">
+
+    <!-- Responsive styles for this template -->
+    <link href="{% static 'responsive.css' %}" rel="stylesheet">
+
+    <!-- Colors for this template -->
+    <link href="{% static 'colors.css' %}" rel="stylesheet">
+
+    <!-- Version Garden CSS for this template -->
+    <link href="{% static 'garden.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    
+
+
+       
+        <header class="header">
+            <div class="container">
+                <nav class="navbar navbar-inverse navbar-toggleable-md">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Forest Timemenu" aria-controls="Forest Timemenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-md-center" id="Forest Timemenu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link color-green-hover" href="{% url 'bloghome' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-green-hover" href="{% url 'myblog' %}">My Blogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  class="nav-link color-green-hover" href="{% url 'suggestions' %}">Suggestions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-green-hover" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                      
+                        </ul>
+                    </div>
+                </nav>
+            </div><!-- end container -->
+        </header><!-- end header -->
+
+        <section class="section wb">
+            <div class="container">
+
+      <form method="POST" method="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" name="userid" value="{{user.id}}" ><br>
+      <input type="hidden" name="firstname" value="{{user.first_name}}" readonly><br>
+      <input type="hidden" name="lastname" value="{{user.last_name}}" readonly><br>
+      {{form.title.label}} <br> 
+      {{form.title}}<br>
+      {{form.blog_detail.label}}<br>
+      {{form.blog_detail}}<br>
+      {{form.blog_Main_Img.label}}{{form.blog_Main_Img}}<br>
+      {{form.blog_pic.label}} {{form.blog_pic}}<br><br>
+      <button>Submit</button>
+    </form>   
+    </div>
+    </section>      
+                    
+       {% for i in follow_blogs %}             
+
+        <section class="section wb">
+            <div class="container">
+              
+
+                                    <div class="blog-meta big-meta col-md-8">
+                              
+                                        <h4>{{i.title}}</h4>
+                                        <p>{{i.blog_detail}}</p>
+                                        <img src="{{i.blog_pic}}">
+                                        <small>By {{i.first_name}} {{i.last_name}}</small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+
+                                <hr class="invis">
+              {% endfor %}
+                              
+    
+        <div class="dmtop">Scroll to Top</div>
+        
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+
+</body>
+</html>

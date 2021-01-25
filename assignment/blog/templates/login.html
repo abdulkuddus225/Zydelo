@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'loginstyle.css' %}">
+</head>
+<body>
+	<!--<form method="POST">
+		{% csrf_token %}
+			<input type="text" name="username"><br><br>
+			<input type="password" name="password"><br><br>
+			<input type="submit" name="login">
+	</form>-->
+	{% for message in messages %}
+		{{message}}
+	{% endfor %}
+<div class="container" id="container">
+	
+	<div class="form-container sign-in-container">
+			<h1>Sign in</h1>
+		<form method="POST">
+				{% csrf_token %}
+			<input type="text" name="username" placeholder="Username"><br><br>
+			<input type="password" name="password" placeholder="password"><br><br>
+			<input type="submit" name="login">
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<a href="../register"><button class="ghost" id="signUp">Sign Up</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
