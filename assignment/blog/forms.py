@@ -21,4 +21,4 @@ class FollowForm(forms.ModelForm):
 	"""docstring for FollowForm"""
 	class Meta:
 		model = Follow
-		fields = ['userid', 'follow_id']
+		fields = ['userid', 'follow_id','firstname', 'lastname']

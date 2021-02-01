@@ -104,31 +104,43 @@
                 </nav>
             </div><!-- end container -->
         </header><!-- end header -->
-        <div class="container">
-          <h4>Suggestions</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+          <h4>Suggestions</h4>  
                     
        {% for i in users %}
-		{% if i.username != 'root' and i.id != current_user %}
+		{% if i.username != 'root' and i.id != current_user%}
+        {% if i.id not in follow_id_get%}
 		<h3>{{i.first_name}} {{i.last_name}} </h3>
 		<form method="POST">{% csrf_token %}
 			<input type="hidden" name="userid" value="{{current_user}}">
-			<input type="hidden" name="follow_id" value="{{i.id}}"><br>
-			<input type="submit" name="follow" value="Follow"><br>
+			<input type="hidden" name="follow_id" value="{{i.id}}">
+            <input type="hidden" name="firstname" value="{{i.first_name}}">
+            <input type="hidden" name="lastname" value="{{i.last_name}}">
+            <input type="hidden" name="following" value="True">
+			<input type="submit" name="follow_true"  id="follow_true" value="Follow"><br>
 		</form>
+        {% else %}
+             <h3>{{i.first_name}} {{i.last_name}} </h3>
+            <input type="submit" name="follow_true"  id="follow_true" value="Following"><br>
+        {% endif %}
+
 		{% endif %}
 	{% endfor %} 
                               
     </div>
-        <div class="dmtop">Scroll to Top</div>
-        
-    </div><!-- end wrapper -->
+        <div class="col-sm">
+                <h4>People Following Me</h4>
+                {% for i in users %}
+                {% if i.id in who_follows_me_get %}
+                        <h5>{{i.first_name}} {{i.last_name}}</h5>
+                {% endif %}
+                {% endfor %}
+        </div>
+        </div>
+    </div>
 
-    <!-- Core JavaScript
-    ================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
 
 </body>
 </html>

@@ -103,19 +103,19 @@
             </div><!-- end container -->
         </header><!-- end header -->
 
-          
+         <div class="container"> <h4>My Blogs</h4></div>
                     
        {% for i in data %}            
 
         <section class="section wb">
             <div class="container">
-              
+                            
 
                                     <div class="blog-meta big-meta col-md-8">
                               
                                         <h4>{{i.title}}</h4>
                                         <p>{{i.blog_detail}}</p>
-                                        <img src="{{i.blog_pic}}">
+                                        <img src="{{i.blog_pic.url}}">
                                         <small>{{i.first_name}} {{i.last_name}}</small>
                                         <a href="edit/{{i.id}}" href="garden-category.html"><input type="submit" name="Edit" value="Edit"></a> 
                                         <a href="delete/{{i.id}}" href="garden-category.html"><input type="submit" name="Delete" value="Delete"></a>

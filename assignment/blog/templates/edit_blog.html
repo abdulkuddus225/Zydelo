@@ -100,13 +100,14 @@
         <div class="container">
           <h4>Edit Blog</h4>
                     
-       <form method="POST">
+       <form enctype="multipart/form-data" method="POST" action="">
  			{% csrf_token %}
  			<input type="hidden" name="userid" value="{{user.id}}" ><br>
  			<input type="text" name="firstname" value="{{user.first_name}}" readonly><br>
  			<input type="text" name="lastname" value="{{user.last_name}}" readonly><br>
  			<input type="text" name="title" value="{{blog_edit.title}}"><br>
  			<textarea name="blog_detail"> {{blog_edit.blog_detail}}</textarea><br>
+            {{form.blog_pic.label}} {{form.blog_pic}}<br><br>
  			<button>Update</button>
  		</form>
                               

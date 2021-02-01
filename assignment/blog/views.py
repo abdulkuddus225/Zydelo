@@ -8,6 +8,7 @@ from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.db import connection
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def userlogin(request):
 	if request.method == 'POST':
@@ -43,18 +44,17 @@ def register(request):
 	context = {'form' : form, 'messages': messages}
 	return render(request, 'register.html', context)
 
+@login_required
 def bloghome(request):
 	form = BlogForm()
-	print(form)
 	get_blog = Blog.objects.all()
-	followers = Follow.objects.all()
 	cur_user = request.user.id
-	query = "SELECT * FROM blog_blog b, blog_follow f where b.userid = f.follow_id and b.userid = %s;"
-	follow_blogs = Blog.objects.raw(query, [cur_user])
-	
+	followers = Follow.objects.filter(userid_id = cur_user)
+	follow_id = []
+	for i in followers:
+		follow_id.append(i.follow_id)
 	if request.method == 'POST':
 		form = BlogForm(request.POST, request.FILES)
-		print(form)
 		if form.is_valid():
 			form.save()
 			return redirect('myblog')
@@ -69,17 +69,17 @@ def bloghome(request):
 			#post.save()
 		else:
 			print("Error")
-	context = {'form':form, 'follow_blogs':follow_blogs}
+	context = {'form':form,'follow_id':follow_id,'get_blog':get_blog}
 	return render(request, 'bloghome.html', context)
 
-
+@login_required
 def myblog(request):
 	current_user = request.user
 	data = Blog.objects.filter(userid=current_user.id)
 	context = {'data':data}
 	return render(request,'myblogs.html', context)
 
-
+@login_required
 def delete_blog(request,id):
 	obj = get_object_or_404(Blog, pk=id)
 	if request.method=='POST':
@@ -88,29 +88,47 @@ def delete_blog(request,id):
 	context = {"obj":obj}
 	return render(request, 'delete.html', context)
 
-
+@login_required
 def suggestions(request):
 	
 	User = get_user_model()
 	users = User.objects.all()
 	current_user = request.user.id
 	form = FollowForm()
-	context = {'users':users, 'current_user':current_user,'form':form}
+	followers = Follow.objects.filter(userid_id = current_user)
+	who_follows_me = Follow.objects.filter(follow_id = current_user)
+	who_follows_me_get = []
+	follow_id_get = []
+	for j in who_follows_me:
+		who_follows_me_get.append(j.userid_id)
+	for i in followers:
+		follow_id_get.append(i.follow_id)
 
 	if request.method=='POST':
-		form = FollowForm(request.POST)
-		if form.is_valid():
-			form.save()
-		return redirect('suggestions')
+		# form = FollowForm(request.POST)
+		# if form.is_valid():
+		# 	form.objects.get_or_create()
+		userid_f = request.POST.get('userid')
+		follow_f = request.POST.get('follow_id')
+		firstname = request.POST.get('firstname')
+		lastname = request.POST.get("lastname")
 
+		try:
+			obj = Follow.objects.get(userid_id = userid_f, follow_id=follow_f)
+		except Follow.DoesNotExist:
+			obj = Follow(userid_id=userid_f, follow_id=follow_f,firstname=firstname,lastname=lastname)
+			obj.save()
+		return redirect('suggestions')
+	context = {'users':users, 'current_user':current_user,'form':form,'follow_id_get':follow_id_get,'who_follows_me_get':who_follows_me_get}
 	return render(request,'suggestions.html', context)
 
-	
+@login_required
 def edit_blog(request,id):
 	blog_edit = Blog.objects.get(id=id)
 	form = BlogForm()
 	if request.method=='POST':
-		form = BlogForm(request.POST, instance=blog_edit)
+		form = BlogForm(data=request.POST, files=request.FILES, instance=blog_edit)
+		print(form)
 		if form.is_valid():
 			form.save()
 		return redirect('../')

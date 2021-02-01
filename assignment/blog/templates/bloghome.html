@@ -144,7 +144,7 @@
         <section class="section wb">
             <div class="container">
 
-      <form method="POST" method="multipart/form-data">
+     <form enctype="multipart/form-data" method="POST" action="">
       {% csrf_token %}
       <input type="hidden" name="userid" value="{{user.id}}" ><br>
       <input type="hidden" name="firstname" value="{{user.first_name}}" readonly><br>
@@ -153,14 +153,31 @@
       {{form.title}}<br>
       {{form.blog_detail.label}}<br>
       {{form.blog_detail}}<br>
-      {{form.blog_Main_Img.label}}{{form.blog_Main_Img}}<br>
       {{form.blog_pic.label}} {{form.blog_pic}}<br><br>
       <button>Submit</button>
     </form>   
     </div>
     </section>      
-                    
-       {% for i in follow_blogs %}             
+    <section class="section wb">
+      {% for i in follow_id %}
+                       {% for j in get_blog %}
+                          {% if i == j.userid %}
+            <div class="container">
+              
+
+                <div class="blog-meta big-meta col-md-8">
+                            <h4>{{j.title}}</h4>
+                            <p>{{j.blog_detail}}</p>
+                            <img src="{{j.blog_pic.url}}">
+                            <small>By {{j.firstname}} {{j.lastname}}</small>
+                          
+                  </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </section>
+      <!--             
 
         <section class="section wb">
             <div class="container">
@@ -172,11 +189,11 @@
                                         <p>{{i.blog_detail}}</p>
                                         <img src="{{i.blog_pic}}">
                                         <small>By {{i.first_name}} {{i.last_name}}</small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
+                                    </div>
+                                </div> -->
 
                                 <hr class="invis">
-              {% endfor %}
+        
                               
     
         <div class="dmtop">Scroll to Top</div>
@@ -185,10 +202,6 @@
 
     <!-- Core JavaScript
     ================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
 
 </body>
 </html>
